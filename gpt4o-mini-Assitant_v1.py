@@ -38,7 +38,8 @@ uploaded_file = st.file_uploader("Upload a screenshot or other image", type=["pn
 # User query input
 user_query = st.text_input("Enter your query:")
 
-# Placeholder for assistant response
+# Human verification checkbox
+human_verification = st.checkbox("I am not a robot")
 response_placeholder = st.empty()
 
 # Function to handle user query
@@ -54,9 +55,10 @@ async def handle_query(query):
         response_placeholder.text(message['choices'][0]['text'])
 
 # Handle user query submission
-if st.button("Submit"):
+if st.button("Submit") and human_verification:
     if user_query:
         response_placeholder.text("Processing your query...")
         asyncio.run(handle_query(user_query))
-    else:
+    elif not human_verification:
+        st.warning("Please verify that you are not a robot.")
         st.warning("Please enter a query.")
