@@ -44,13 +44,13 @@ response_placeholder = st.empty()
 # Function to handle user query
 async def handle_query(query):
     # Implement the logic to handle the query using OpenAI API and tools
-    response = await openai.Completion.create(
+    response = await openai.Completion.acreate(
         engine="davinci-codex",
         prompt=query,
         max_tokens=150,
         stream=True
     )
-    for message in response:
+    async for message in response:
         response_placeholder.text(message['choices'][0]['text'])
 
 # Handle user query submission
