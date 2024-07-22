@@ -45,7 +45,7 @@ response_placeholder = st.empty()
 async def handle_query(query):
     # Implement the logic to handle the query using OpenAI API and tools
     response = await openai.Completion.acreate(
-        engine="davinci-codex",
+        engine="gpt4o-mini",
         prompt=query,
         max_tokens=150,
         stream=True
