@@ -53,15 +53,42 @@ assistant = Assistant(
     api_key=OPENAI_API_KEY
 )
 
+# Define functions that the assistant can call
+def get_router_info(router_name):
+    return routers.get(router_name, "Router not found")
+
 # Function to handle user query
 async def handle_query(query):
     # Implement the logic to handle the query using OpenAI assistants API
     response = await assistant.chat(
         messages=[{"role": "user", "content": query}],
-        stream=True
+        stream=True,
+        functions=[
+            {
+                "name": "get_router_info",
+                "description": "Get information about a specific router",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "router_name": {
+                            "type": "string",
+                            "description": "The name of the router"
+                        }
+                    },
+                    "required": ["router_name"]
+                }
+            }
+        ]
     )
     async for message in response:
-        response_placeholder.text(message['content'])
+        if "function_call" in message:
+            function_name = message["function_call"]["name"]
+            arguments = message["function_call"]["arguments"]
+            if function_name == "get_router_info":
+                result = get_router_info(arguments["router_name"])
+                response_placeholder.text(result)
+        else:
+            response_placeholder.text(message['content'])
 
 # Handle user query submission
 if st.button("Submit") and human_verification:
