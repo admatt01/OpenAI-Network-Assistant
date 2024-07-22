@@ -3,6 +3,8 @@ import json
 import streamlit as st
 from dotenv import load_dotenv
 import openai
+import asyncio
+from concurrent.futures import ThreadPoolExecutor
 
 # Load environment variables
 load_dotenv()
@@ -40,14 +42,21 @@ user_query = st.text_input("Enter your query:")
 response_placeholder = st.empty()
 
 # Function to handle user query
-def handle_query(query):
+async def handle_query(query):
     # Implement the logic to handle the query using OpenAI API and tools
-    pass
+    response = await openai.Completion.create(
+        engine="davinci-codex",
+        prompt=query,
+        max_tokens=150,
+        stream=True
+    )
+    for message in response:
+        response_placeholder.text(message['choices'][0]['text'])
 
 # Handle user query submission
 if st.button("Submit"):
     if user_query:
         response_placeholder.text("Processing your query...")
-        handle_query(user_query)
+        asyncio.run(handle_query(user_query))
     else:
         st.warning("Please enter a query.")
