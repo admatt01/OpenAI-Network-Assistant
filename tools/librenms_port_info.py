@@ -4,7 +4,7 @@ import json
 from dotenv import load_dotenv
 from typing import Dict, Any, Optional
 
-def librenms_port_info(port: int) -> Dict[str, Any]:
+def librenms_port_info(port_id: int) -> Dict[str, Any]:
     # Load environment variables
     load_dotenv()
 
@@ -16,7 +16,7 @@ def librenms_port_info(port: int) -> Dict[str, Any]:
         'Content-Type': 'application/json'
     }
 
-    url = f"{BASE_URL}/ports/{port}"
+    url = f"{BASE_URL}/ports/{port_id}"
 
     try:
         response = requests.get(url, headers=headers)
@@ -27,6 +27,6 @@ def librenms_port_info(port: int) -> Dict[str, Any]:
 
 # Example usage
 if __name__ == "__main__":
-    result = librenms_port_info(port=42)
+    result = librenms_port_info(port_id=42)
     print(result)
     

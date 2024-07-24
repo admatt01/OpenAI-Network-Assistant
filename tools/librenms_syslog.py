@@ -69,33 +69,3 @@ if __name__ == "__main__":
         print(json.dumps(result, indent=2))
     except Exception as e:
         print(f"Error: {e}")
-        
-pass
-
-functions_info = {
-    "name": "librenms_syslog",
-    "description": "Retrieves syslog entries from LibreNMS for all devices or a specific device. Allows filtering based on time range and limiting the number of results.",
-    "parameters": {
-        "type": "object",
-        "properties": {
-            "hostname": {
-                "type": "string",
-                "description": "Either the device's hostname or ID (optional)"
-            },
-            "limit": {
-                "type": "number",
-                "description": "The maximum number of results to return (optional)"
-            },
-            "from_time": {
-                "type": "string",
-                "format": "date-time",
-                "description": "The start date and time or the event ID to search from (optional)"
-            },
-            "to_time": {
-                "type": "string",
-                "format": "date-time",
-                "description": "The end date and time or the event ID to search to (optional)"
-            }
-        }
-    }
-}

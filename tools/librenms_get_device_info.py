@@ -9,7 +9,7 @@ load_dotenv()
 
 def librenms_get_device_info(hostname: Optional[str] = None) -> Dict[str, Any]:
     """
-    Retrieves device information from LibreNMS. Can fetch details for all devices or a specific device using its hostname.
+    Retrieves device information from LibreNMS. Can fetch details for all devices or a specific device using its hostname or device ID.
     """
     api_token = os.getenv('LIBRENMS_API_TOKEN')
     base_url = os.getenv('LIBRENMS_BASE_URL')
