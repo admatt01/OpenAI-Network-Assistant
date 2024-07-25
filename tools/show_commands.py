@@ -38,7 +38,7 @@ def load_router_ips(file_path):
         logger.error(f"Error loading router IPs: {e}")
         return {}
 
-def show_commands_gpt4o(command, routers):
+def show_commands(command, routers):
     try:
         logger.info(f"Received command: {command}")
         logger.info(f"Routers to connect to: {routers}")
@@ -109,7 +109,7 @@ def show_commands_gpt4o(command, routers):
             "results": combined_results
         }
     except Exception as e:
-        logger.error(f"Error in show_commands_gpt4o: {str(e)}")
+        logger.error(f"Error in show_commands: {str(e)}")
         return {
             "status": "error",
             "message": str(e),

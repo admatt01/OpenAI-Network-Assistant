@@ -1,3 +1,7 @@
+Instructions for Agent: This file contains a dictionary of the network routers and their management information.
+When using the config_commands and show_commands tools, use the "hostname" as the argument for those tools.
+When using the librenms tools, use the "librenms_hostname" or "librenms librenms_device_id".
+
 {
   "routers": [
     {

@@ -13,7 +13,7 @@ from tools.librenms_arp import librenms_arp
 from tools.librenms_get_device_info import librenms_get_device_info
 from tools.librenms_syslog import librenms_syslog
 from tools.librenms_list_networks import librenms_list_networks
-from tools.show_commands_gpt4o import show_commands_gpt4o
+from tools.show_commands import show_commands
 from tools.config_commands import config_commands
 from tools.librenms_get_interface_info import librenms_get_interface_info
 
@@ -43,16 +43,24 @@ if "tool_results" not in st.session_state:
     st.session_state.tool_results = {}
 
 # Set up Streamlit page
-st.set_page_config(page_title="GPT4o Mini Network Assistant", page_icon=":speech_balloon:")
-st.title("Welcome to the GPT4o Mini Network Assistant")
+st.set_page_config(page_title="GPT4 Network Assistant", page_icon=":speech_balloon:")
+st.title("Welcome to the GPT4 Network Assistant")
 
-# Sidebar with Restart Session button
+# Sidebar with Restart Session button and model selection
 if st.sidebar.button("Restart Session"):
     st.session_state.session_id = str(uuid.uuid4())
     st.session_state.thread_id = None
     st.session_state.messages = []
     st.session_state.tool_results = {}
     st.rerun()
+
+# Add model selection dropdown to sidebar
+model_options = ["gpt-4o-mini-2024-07-18", "gpt-4o", "gpt-4-turbo-preview"]
+st.session_state.openai_model = st.sidebar.selectbox(
+    "Select Model",
+    options=model_options,
+    index=model_options.index(st.session_state.openai_model)
+)
 
 # Function to poll run status
 async def poll_run(client, thread_id, run_id, timeout=300):
@@ -91,9 +99,9 @@ async def execute_tool(tool_call):
         elif tool_name == "librenms_get_interface_info":
             interface_info_result = librenms_get_interface_info(**arguments)
             output = json.dumps(interface_info_result, indent=2)
-        elif tool_name == "show_commands_gpt4o":
-            gpt4o_result = show_commands_gpt4o(**arguments)
-            output = json.dumps(gpt4o_result, indent=2)
+        elif tool_name == "show_commands":
+            show_result = show_commands(**arguments)
+            output = json.dumps(show_result, indent=2)
         elif tool_name == "config_commands":
             config_result = config_commands(**arguments)
             output = json.dumps(config_result, indent=2)
@@ -113,7 +121,7 @@ if not st.session_state.thread_id:
     st.session_state.thread_id = thread.id
     
     # Add introduction message
-    intro_message = "Hello! I'm your GPT4o Mini Network Assistant. How can I help you today?"
+    intro_message = "Hello! I'm your GPT4o-mini Network Assistant. I'm fast and cheap but I'm not easy. How can I help you today?"
     st.session_state.messages.append({"role": "assistant", "content": intro_message})
 
 # Display chat history
@@ -139,6 +147,7 @@ if prompt := st.chat_input("Enter your message"):
         run = client.beta.threads.runs.create(
             thread_id=st.session_state.thread_id,
             assistant_id=assistant_id,
+            model=st.session_state.openai_model  # Use the selected model
         )
         run = asyncio.run(poll_run(client, st.session_state.thread_id, run.id))
 
@@ -176,3 +185,22 @@ if prompt := st.chat_input("Enter your message"):
     else:
         logger.error(f"Run ended with unexpected status: {run.status}")
         st.error(f"An error occurred: Run ended with status {run.status}")
+
+# File upload in sidebar
+uploaded_files = st.sidebar.file_uploader("Upload files", accept_multiple_files=True, type=['pdf', 'txt', 'docx', 'xlsx', 'csv'])
+
+if st.sidebar.button("Upload Files"):
+    if uploaded_files:
+        # Upload files to vector store
+        file_streams = [file for file in uploaded_files]
+        vector_store_id = os.environ.get('OPENAI_VECTORSTORE_ID')
+        try:
+            file_batch = client.beta.vector_stores.file_batches.upload_and_poll(
+                vector_store_id=vector_store_id, files=file_streams
+            )
+            st.sidebar.success(f"Files uploaded successfully! Status: {file_batch.status}")
+            st.sidebar.info(f"File counts: {file_batch.file_counts}")
+        except Exception as e:
+            st.sidebar.error(f"Error uploading files: {str(e)}")
+    else:
+        st.sidebar.warning("Please select files to upload.")
