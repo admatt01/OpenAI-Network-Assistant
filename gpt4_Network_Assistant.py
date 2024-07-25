@@ -53,6 +53,8 @@ if st.sidebar.button("Restart Session"):
     st.session_state.messages = []
     st.session_state.tool_results = {}
     st.rerun()
+    
+st.sidebar.markdown("<br>", unsafe_allow_html=True) 
 
 # Add model selection dropdown to sidebar
 model_options = ["gpt-4o-mini-2024-07-18", "gpt-4o", "gpt-4-turbo-preview"]
@@ -61,6 +63,8 @@ st.session_state.openai_model = st.sidebar.selectbox(
     options=model_options,
     index=model_options.index(st.session_state.openai_model)
 )
+
+st.sidebar.markdown("<br>", unsafe_allow_html=True) 
 
 # Function to poll run status
 async def poll_run(client, thread_id, run_id, timeout=300):
@@ -121,7 +125,7 @@ if not st.session_state.thread_id:
     st.session_state.thread_id = thread.id
     
     # Add introduction message
-    intro_message = "Hello! I'm your GPT4o-mini Network Assistant. I'm fast and cheap but I'm not easy. How can I help you today?"
+    intro_message = "Hello! I'm your GPT4 Network Assistant. I'm fast and cheap but I'm not easy. How can I help you today?"
     st.session_state.messages.append({"role": "assistant", "content": intro_message})
 
 # Display chat history
@@ -187,7 +191,7 @@ if prompt := st.chat_input("Enter your message"):
         st.error(f"An error occurred: Run ended with status {run.status}")
 
 # File upload in sidebar
-uploaded_files = st.sidebar.file_uploader("Upload files", accept_multiple_files=True, type=['pdf', 'txt', 'docx', 'xlsx', 'csv'])
+uploaded_files = st.sidebar.file_uploader("Upload files to vector db", accept_multiple_files=True, type=['pdf', 'txt', 'docx', 'json'])
 
 if st.sidebar.button("Upload Files"):
     if uploaded_files:

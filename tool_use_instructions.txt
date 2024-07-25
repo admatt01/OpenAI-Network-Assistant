@@ -5,61 +5,61 @@ When using the librenms tools, use the "librenms_hostname" or "librenms librenms
 {
   "routers": [
     {
-      "hostname": "cisco_r1",
+      "hostname": "cisco-r1",
       "management_ip": "192.168.20.201",
       "librenms_hostname": "ip-192-168-20-201.ec2.internal",
       "librenms_device_id": 11
     },
     {
-      "hostname": "cisco_r2",
+      "hostname": "cisco-r2",
       "management_ip": "192.168.20.202",
       "librenms_hostname": "ip-192-168-20-202.ec2.internal",
       "librenms_device_id": 2
     },
     {
-      "hostname": "cisco_r3",
+      "hostname": "cisco-r3",
       "management_ip": "192.168.20.203",
       "librenms_hostname": "ip-192-168-20-203.ec2.internal",
       "librenms_device_id": 3
     },
     {
-      "hostname": "cisco_r4",
+      "hostname": "cisco-r4",
       "management_ip": "192.168.20.204",
       "librenms_hostname": "ip-192-168-20-204.ec2.internal",
       "librenms_device_id": 4
     },
     {
-      "hostname": "cisco_r5",
+      "hostname": "cisco-r5",
       "management_ip": "192.168.20.205",
       "librenms_hostname": "ip-192-168-20-205.ec2.internal",
       "librenms_device_id": 5
     },
     {
-      "hostname": "cisco_r6",
+      "hostname": "cisco-r6",
       "management_ip": "192.168.20.206",
       "librenms_hostname": "ip-192-168-20-206.ec2.internal",
       "librenms_device_id": 6
     },
     {
-      "hostname": "cisco_r7",
+      "hostname": "cisco-r7",
       "management_ip": "192.168.20.207",
       "librenms_hostname": "ip-192-168-20-207.ec2.internal",
       "librenms_device_id": 7
     },
     {
-      "hostname": "cisco_r8",
+      "hostname": "cisco-r8",
       "management_ip": "192.168.20.208",
       "librenms_hostname": "ip-192-168-20-208.ec2.internal",
       "librenms_device_id": 8
     },
     {
-      "hostname": "cisco_r9",
+      "hostname": "cisco-r9",
       "management_ip": "192.168.20.209",
       "librenms_hostname": "ip-192-168-20-209.ec2.internal",
       "librenms_device_id": 9
     },
     {
-      "hostname": "cisco_r10",
+      "hostname": "cisco-r10",
       "management_ip": "192.168.20.210",
       "librenms_hostname": "ip-192-168-20-210.ec2.internal",
       "librenms_device_id": 10

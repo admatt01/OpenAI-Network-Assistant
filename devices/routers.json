@@ -1,33 +1,33 @@
 {
     "routers": {
-      "cisco_r1": {
+      "cisco-r1": {
         "management_ip": "192.168.20.201"
       },
-      "cisco_r2": {
+      "cisco-r2": {
         "management_ip": "192.168.20.202"
       },
-      "cisco_r3": {
+      "cisco-r3": {
         "management_ip": "192.168.20.203"
       },
-      "cisco_r4": {
+      "cisco-r4": {
         "management_ip": "192.168.20.204"
       },
-      "cisco_r5": {
+      "cisco-r5": {
         "management_ip": "192.168.20.205"
       },
-      "cisco_r6": {
+      "cisco-r6": {
         "management_ip": "192.168.20.206"
       },
-      "cisco_r7": {
+      "cisco-r7": {
         "management_ip": "192.168.20.207"
       },
-      "cisco_r8": {
+      "cisco-r8": {
         "management_ip": "192.168.20.208"
       },
-      "cisco_r9": {
+      "cisco-r9": {
         "management_ip": "192.168.20.209"
       },
-      "cisco_r10": {
+      "cisco-r10": {
         "management_ip": "192.168.20.210"
       }
     }
