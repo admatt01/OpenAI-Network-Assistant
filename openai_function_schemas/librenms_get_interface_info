@@ -1,0 +1,21 @@
+{
+  "name": "librenms_get_interface_info",
+  "description": "Search for an interface on a specific device in LibreNMS and retrieve its information.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "device_id": {
+        "type": "integer",
+        "description": "The ID of the device to search for the interface on."
+      },
+      "interface_name": {
+        "type": "string",
+        "description": "The name or alias of the interface to search for (e.g., 'ethernet0/0')."
+      }
+    },
+    "required": [
+      "device_id",
+      "interface_name"
+    ]
+  }
+}

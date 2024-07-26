@@ -1,0 +1,15 @@
+{
+    "name": "get_local_time",
+    "description": "Retrieves the current local time and date for a given time zone. Defaults to 'Australia/Sydney' if no time zone is provided.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "timeZone": {
+          "type": "string",
+          "description": "The IANA time zone string for which to retrieve the local time. Examples: 'Australia/Sydney', 'America/New_York', 'Asia/Tokyo'.",
+          "default": "Australia/Sydney"
+        }
+      },
+      "required": []
+    }
+  }

@@ -1,0 +1,27 @@
+{
+    "name": "config_commands",
+    "description": "Used for connecting to specific routers and executing configuration commands. Can be used on multiple routers concurrently to apply configurations across specified devices. Router information is loaded from 'devices/routers.json' and credentials are fetched from AWS Secrets Manager. Use 'configure terminal' to enter configuration mode on the routers.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "commands": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Array of configuration commands to execute on the specified routers"
+        },
+        "target_routers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Array of router names to configure. Must match names in 'devices/routers.json'"
+        }
+      },
+      "required": [
+        "commands",
+        "target_routers"
+      ]
+    }
+  }

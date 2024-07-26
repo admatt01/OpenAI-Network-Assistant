@@ -1,0 +1,28 @@
+{
+  "name": "librenms_syslog",
+  "description": "Retrieves syslog entries from LibreNMS for all devices or a specific device. Allows filtering based on time range and limiting the number of results.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "hostname": {
+        "type": "string",
+        "description": "Either the librenms_hostname or device ID (optional)"
+      },
+      "limit": {
+        "type": "number",
+        "description": "The maximum number of results to return (optional)"
+      },
+      "from_time": {
+        "type": "string",
+        "format": "date-time",
+        "description": "The start date and time or the event ID to search from (optional)"
+      },
+      "to_time": {
+        "type": "string",
+        "format": "date-time",
+        "description": "The end date and time or the event ID to search to (optional)"
+      }
+    },
+    "required": []
+  }
+}

@@ -1,0 +1,9 @@
+{
+    "name": "librenms_list_networks",
+    "description": "Retrieves all IPv4 and IPv6 networks from LibreNMS.",
+    "parameters": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    }
+  }

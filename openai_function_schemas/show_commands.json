@@ -1,0 +1,24 @@
+{
+    "name": "show_commands",
+    "description": "Used for connecting to routers and gaining information by using 'show' commands. Can be used on multiple routers concurrently to collate information from multiple routers.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "command": {
+          "type": "string",
+          "description": "The show command to execute on the routers"
+        },
+        "routers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of routers to execute the command on"
+        }
+      },
+      "required": [
+        "routers",
+        "command"
+      ]
+    }
+  }

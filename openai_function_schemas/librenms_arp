@@ -1,0 +1,20 @@
+{
+  "name": "librenms_arp",
+  "description": "Retrieves ARP entries from LibreNMS. Allows searching for specific ARP entries or all entries for a device.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "query": {
+        "type": "string",
+        "description": "CIDR network (e.g., 10.0.0.0/24) or 'all' for all entries"
+      },
+      "device": {
+        "type": "string",
+        "description": "librenms_hostname or device ID. Required if query is 'all'"
+      }
+    },
+    "required": [
+      "query"
+    ]
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "name": "librenms_bgp",
+  "description": "Retrieves BGP information from LibreNMS including detailed peering information, status, and descriptions. This tool allows filtering based on various BGP parameters.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "hostname": {
+        "type": "string",
+        "description": "Either the librenms_hostname or device ID"
+      },
+      "asn": {
+        "type": "string",
+        "description": "The local ASN to filter by"
+      },
+      "remote_asn": {
+        "type": "string",
+        "description": "Filter by remote peer ASN"
+      },
+      "bgp_adminstate": {
+        "type": "string",
+        "description": "Filter by BGP admin state (e.g., start, stop, running)"
+      },
+      "bgp_family": {
+        "type": "string",
+        "description": "Filter by BGP address family (4 or 6)"
+      },
+      "bgp_desc": {
+        "type": "string",
+        "description": "Filter by BGP neighbor description"
+      },
+      "bgp_state": {
+        "type": "string",
+        "description": "Filter by BGP session state (e.g., established, idle)"
+      },
+      "local_address": {
+        "type": "string",
+        "description": "Filter by local IP peer address"
+      },
+      "remote_address": {
+        "type": "string",
+        "description": "Filter by remote IP peer address"
+      }
+    },
+    "required": []
+  }
+}

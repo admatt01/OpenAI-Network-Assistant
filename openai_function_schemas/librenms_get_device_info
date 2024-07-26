@@ -1,0 +1,14 @@
+{
+  "name": "librenms_get_device_info",
+  "description": "Retrieves device information from LibreNMS. Can fetch details for all devices or a specific device using its hostname or device ID.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "hostname": {
+        "type": "string",
+        "description": "The librenms_hostname or device ID of the specific device (optional). If not provided, details for all devices will be retrieved."
+      }
+    },
+    "required": []
+  }
+}
