@@ -1,3 +1,4 @@
+import os
 import paramiko
 import json
 import logging
@@ -10,7 +11,7 @@ from botocore.exceptions import NoCredentialsError, PartialCredentialsError
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-def get_secret(secret_name, region_name="us-east-1"):
+def get_secret(secret_name, region_name=os.environ.get('AWS_REGION_NAME')):
     session = boto3.session.Session()
     client = session.client(
         service_name='secretsmanager',
@@ -89,7 +90,7 @@ def config_commands(commands, target_routers):
 
     try:
         # Fetch the username and password from AWS Secrets Manager
-        secret_name = "routers"
+        secret_name = os.environ.get('AWS_SECRETS_NAME')
         credentials = get_secret(secret_name)
         if not credentials:
             raise ValueError('Could not retrieve credentials from AWS Secrets Manager')
