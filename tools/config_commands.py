@@ -4,12 +4,15 @@ import json
 import logging
 import boto3
 import time
+from dotenv import load_dotenv
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from botocore.exceptions import NoCredentialsError, PartialCredentialsError
 
 # Initialize logger
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+load_dotenv()
 
 def get_secret(secret_name, region_name=os.environ.get('AWS_REGION_NAME')):
     session = boto3.session.Session()
@@ -48,7 +51,7 @@ def execute_commands(router_name, router_info, commands, username, password):
 
         ssh = paramiko.SSHClient()
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        ssh.connect(management_ip, username=username, password=password, timeout=10)
+        ssh.connect(management_ip, username=username, password=password, allow_agent=False, look_for_keys=False, timeout=10)
 
         # Start an interactive shell
         shell = ssh.invoke_shell()
